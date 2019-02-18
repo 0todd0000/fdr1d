@@ -1,9 +1,10 @@
 
-__version__ = '0.01'  #2019.02.12
+__version__ = '0.02'  #2019.02.18
 
 
 import numpy as np
 from scipy import stats
+import spm1d
 
 
 eps    = np.finfo(float).eps  #smallest floating number greater than zero
@@ -44,7 +45,7 @@ def fpnp(z, zstar, signal):
 
 
 
-def inference(z, df, alpha=0.05, stat='T'):
+def inference_manual(z, df, alpha=0.05, two_tailed=True, stat='T'):
 	'''
 	Compute the critical test statistic value using false discovery rate (FDR)-based inference.
 
@@ -57,6 +58,8 @@ def inference(z, df, alpha=0.05, stat='T'):
 	alpha : Type I error rate (scalar between 0 and 1)
 
 	stat : type of test statistic ("T" or "F")
+	
+	two_tailed : two-tailed (True) or one-tailed (False) inference
 
 
 	OUTPUTS:
@@ -81,8 +84,15 @@ def inference(z, df, alpha=0.05, stat='T'):
 		p     = stats.t.sf(z, df)
 	elif stat=='F':
 		p     = stats.f.sf(z, *df)
+	elif stat=='T2':
+		p     = spm1d.rft1d.T2.sf0d(z, df)
+	elif stat=='X2':
+		p     = stats.chi2.sf(z, df)
 	else:
-		raise ValueError('"stat" must be "T" or "F"')
+		raise ValueError('"stat" must be one of: "T", "F", "T2", "X2"')
+		
+	if stat!='T' and two_tailed:
+		raise ValueError('"two_tailed" must be False when the test statistic is "%s"'%stat)
 
 	# sort p values:
 	i         = np.argsort(p)
@@ -90,6 +100,7 @@ def inference(z, df, alpha=0.05, stat='T'):
 
 	#compute sorted p value threshold:
 	Q         = z.size
+	alpha     = 0.5*alpha if two_tailed else alpha
 	psortedth = alpha / Q * (np.arange(Q) + 1)
 
 	#compute test statistic threshold
@@ -102,5 +113,13 @@ def inference(z, df, alpha=0.05, stat='T'):
 
 	return zstar
 
+
+
+def inference(spm, alpha=0.05, two_tailed=False):
+	if not isinstance(spm, spm1d.stats._spm._SPM):
+		raise TypeError('The first argument must be a 1D SPM object.')
+		
+	df      = spm.df[1] if (spm.STAT in ['T','X2']) else spm.df
+	return inference_manual(spm.z, df, alpha=alpha, two_tailed=two_tailed, stat=spm.STAT)
 
 
