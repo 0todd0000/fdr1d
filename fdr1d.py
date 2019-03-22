@@ -84,12 +84,14 @@ def inference_manual(z, df, alpha=0.05, two_tailed=True, stat='T'):
 		p     = stats.t.sf(z, df)
 	elif stat=='F':
 		p     = stats.f.sf(z, *df)
-	elif stat=='T2':
-		p     = spm1d.rft1d.T2.sf0d(z, df)
-	elif stat=='X2':
-		p     = stats.chi2.sf(z, df)
+	# elif stat=='T2':
+	# 	p     = spm1d.rft1d.T2.sf0d(z, df)
+	# elif stat=='X2':
+	# 	p     = stats.chi2.sf(z, df)
+	# else:
+	# 	raise ValueError('"stat" must be one of: "T", "F", "T2", "X2"')
 	else:
-		raise ValueError('"stat" must be one of: "T", "F", "T2", "X2"')
+		raise ValueError('"stat" must be one of: "T", "F"')
 		
 	if stat!='T' and two_tailed:
 		raise ValueError('"two_tailed" must be False when the test statistic is "%s"'%stat)
