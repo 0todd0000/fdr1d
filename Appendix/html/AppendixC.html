@@ -13089,7 +13089,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -13414,7 +13414,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As the signal amplitude increases, an increasing number of continuum nodes exceed a given threshold. In order to maintain the <strong>proportion of false negative nodes</strong> at $\alpha$=0.05, FDR must reduce the threshold so that roughly 5% of the nodes are part of the noise (and not the signal). In other words, FDR regards a greater number of suprathreshold nodes as better evidence of the existence of a true signal, so adjust the threshold downward in attempts to capture approximately 95% of the signal.</p>
+<p>As the signal amplitude increases, an increasing number of continuum nodes exceed a given threshold. In order to maintain the <strong>proportion of false positive nodes</strong> at $\alpha$=0.05, FDR must reduce the threshold so that roughly 5% of the nodes are part of the noise (and not the signal). In other words, FDR regards a greater number of suprathreshold nodes as better evidence of the existence of a true signal, so adjusts the threshold downward in attempts to capture approximately 95% of the signal.</p>
 <p>However, this interpretation is valid only over a large number of experiments. FDR does not aim to yield false positive nodes at a rate of 5% for each 1D t continuum. Instead it aims to yield false positive nodes at a rate of 5% for the <strong>infinite set of 1D t continua</strong>.</p>
 <p>Let's run more simulations to check the long-term behavior of the FDR threshold.</p>
 
