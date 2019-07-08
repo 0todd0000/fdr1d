@@ -11,7 +11,6 @@ import spm1d
 import fdr1d
 
 
-
 #(0) Load data:
 dataset      = spm1d.data.uv1d.t2.PlantarArchAngle()
 YA,YB        = dataset.get_data()  #slow and fast walking
@@ -35,15 +34,16 @@ pyplot.close('all')
 pyplot.figure(  )
 ax     = pyplot.axes()
 spm1d.plot.plot_mean_sd(YA, linestyle ='-', label = 'Fast walking')
-spm1d.plot.plot_mean_sd(YB, linestyle = ':', facecolor='k', label ='Slow walking')
+spm1d.plot.plot_mean_sd(YB, linestyle = ':', facecolor='k', label ='Normal walking')
 ax.axhline(y=0, color='k', linestyle=':')
 ax.set_xlabel('Time (%)', fontsize = 17)
 ax.set_ylabel('Plantar arch angle  (deg)', fontsize = 17)
 ax.text(-1, 9.3, 'a', color='k', fontsize= 24) 
 ax.legend(loc =3, fontsize=18)   
 
-
 pyplot.style.use('classic')
+pyplot.rcParams['figure.facecolor'] = 'white'
+
 pyplot.rcParams['figure.facecolor'] = 'white'
 
 pyplot.rc('xtick',labelsize=18)
