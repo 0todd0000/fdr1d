@@ -7,7 +7,7 @@ Created on Fri May 24 11:26:50 2019
 """
 
 import numpy as np 
- 
+from scipy import stats
 from matplotlib import pyplot 
 import spm1d 
 import power1d 
@@ -69,6 +69,12 @@ t         = tstat_regress(y, x)
 tstar_rft = spm1d.rft1d.t.isf(alpha/2, df, Q, FWHM)
 tstar_fdr = fdr1d.inference_manual(t,df,alpha=0.05, two_tailed=True, stat='T')
 
+t_0D       = spm1d.rft1d.t.isf0d(alpha/2,6)
+
+p_Bonfe = spm1d.util.p_critical_bonf(alpha,100)
+
+t_Bonfe = stats.t.isf(p_Bonfe/2, 6)
+
 
 
 #(4) Plot:
@@ -81,13 +87,27 @@ ax     = pyplot.axes()
 # plot statistical results:
 
 ax.plot(t, 'k', lw=2)
-ax.axhline(tstar_rft, color='k', ls='--', label =r'$t^*$ (RFT) = ± %.3f'%tstar_rft)
-ax.axhline(tstar_fdr, color='k', ls=':', label =r'$t^*$ (FDR) = ± %.3f'%tstar_fdr)
-ax.axhline(-tstar_rft, color='k', ls='--')
-ax.axhline(-tstar_fdr, color='k', ls=':')
-ax.legend(loc='upper right', fontsize=8)
+ax.axhline(tstar_rft, color='k', ls='--', lw=2)
+ax.axhline(tstar_fdr, color='k', ls='-.', lw=2)
+ax.axhline(t_Bonfe, color='0.7', linestyle=':', lw=5)
+ax.axhline(-t_Bonfe, color='0.7', linestyle=':', lw=5)
+ax.axhline (t_0D, color='0.7', linestyle ='--', lw=2)
+ax.axhline (-t_0D, color='0.7', linestyle ='--', lw=2)
+
+ax.axhline(-tstar_rft, color='k', lw=2, ls='--')
+ax.axhline(-tstar_fdr, color='k', lw=2, ls='-.')
 ax.set_xlabel('Time (%)', fontsize =18)
 ax.text(-1, 8.2, 'b', color='k', fontsize= 24)
+
+ax.text(60, 6.2, 'Bonferroni', color='k', fontsize= 12) 
+ax.text(60, -7.4, 'Bonferroni', color='k', fontsize= 12) 
+ax.text(35, 5.4, 'RFT', color='k', fontsize= 12)
+ax.text(35, - 5.7, 'RFT', color='k', fontsize= 12)
+ax.text(35, 3.3, 'FDR', color='k', fontsize= 12)
+ax.text(35, - 4.5, 'FDR', color='k', fontsize= 12)
+ax.text(60, 1.9, 'Uncorrected', color='k', fontsize= 12)
+ax.text(60, - 2.2, 'Uncorrected', color='k', fontsize= 12)
+
 #ax.set_ylabel('t value', fontsize = 18)
 
 ax.set_xlim(0)
@@ -95,9 +115,9 @@ pyplot.ylim(-8, 8)
 
 ax.axhline(0, color='black', ls=':', lw =0.9)
 
-ax.legend(fontsize = 16)
+
 ax.set_xlim(0, 100)
-ax.legend(loc =4, fontsize=18) 
+#ax.legend(loc =4, fontsize=18) 
   
 pyplot.rc('xtick',labelsize=18)
 pyplot.rc('ytick',labelsize=18)
