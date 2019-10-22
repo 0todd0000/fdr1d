@@ -21,7 +21,7 @@ S_sim         = [0, 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 1
 nNodes        = 101
 J             = 8
 alpha         = 0.05
-nIterations   = 100   #change this to 10000 to replicate the paper’s results
+nIterations   = 10
 Q       = 101
 q       = 50
 amp     = 3
@@ -61,15 +61,15 @@ fp_fdr = np.nanmean(FD,axis=1)
 
 pyplot.close('all')
 ax      = pyplot.axes()
-ax.plot(S_sim, ISF, '-', color='k', linewidth= 2, label = 'RFT threshold')
-ax.plot(S_sim, fp_fdr, 'o',color='k', linewidth= 2, label = 'FDR threshold')
-ax.set_xlim(0,21)
+ax.plot(S_sim, ISF, '-', color='k', linewidth= 1, label = 'RFT threshold')
+ax.plot(S_sim, fp_fdr, '--',color='k', linewidth= 1, label = 'FDR threshold')
+ax.set_xlim(0,20)
 ax.set_ylim(1.5,10)
 ax.set_xlabel('σ (%)', size=18)
-ax.set_ylabel('Critical threshold', size=18)
+ax.set_ylabel('Critical t value', size=18)
 ax.legend(fontsize = 14)
 
-ax.text(0.2, 10.2, 'a', fontsize=20, color='k')
+ax.text(0, 10.1, 'a', fontsize=20, color='k')
 
 pyplot.style.use('classic')
 pyplot.rcParams['figure.facecolor'] = 'white'

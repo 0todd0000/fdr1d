@@ -21,7 +21,7 @@ S_sim         = [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 
 
 J             = 8
 alpha         = 0.05
-nIterations   = 100   #change this to 10000 to replicate the paper’s results
+nIterations   = 10
 Q       = 101 
 q       = 50
 FWHM    = 20 
@@ -57,20 +57,20 @@ fp_fdr = np.nanmean(FD,axis=1)
 
 pyplot.close('all')
 ax            = pyplot.axes()
-ax.plot(S_sim, ISF, '-', color='k', linewidth= 2, label = 'RFT threshold')
-ax.plot(S_sim, fp_fdr, 'o',color='k', linewidth= 2, label = 'FDR threshold')
+ax.plot(S_sim, ISF, '-', color='k', linewidth= 1, label = 'RFT threshold')
+ax.plot(S_sim, fp_fdr, '--',color='k', linewidth= 1, label = 'FDR threshold')
 ax.set_xlabel('Signal amplitude (amp) ', size=18)
 
 ax.legend(fontsize = 14)
 pyplot.rcParams.update({'font.size': 18})
-ax.text(0.2, 10.1, 'b', fontsize=20, color='k')
+ax.text(0.0, 10.1, 'b', fontsize=20, color='k')
 
 ax2 = ax.twinx()
 
 ax.set_yticklabels([])
 ax2.set_yticklabels([])
 
-ax.set_xlim(0, 4.2)
+ax.set_xlim(0, 4)
 ax.set_ylim(1.5,10)
 
 

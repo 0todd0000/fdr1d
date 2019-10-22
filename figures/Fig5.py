@@ -27,6 +27,9 @@ def custom_legend(ax, colors=None, labels=None, linestyles=None, linewidths=None
 	ax.set_ylim(y0, y1)
 	return ax.legend(h, labels, **kwdargs, fontsize=14)
 
+
+
+
 #(0) Set parameters:
 
 np.random.seed(0)
@@ -34,7 +37,7 @@ J_sim         = np.arange(5, 51, 3)
 nNodes        = 101
 WW            = [10, 20, 30]
 alpha         = 0.05
-nIterations   = 10000
+nIterations   = 100
 
 
 FD1     = []
@@ -98,8 +101,6 @@ FD4     = []
 
 #(0) Set parameters:
 
-#(0) Set parameters:
-
 np.random.seed(0)
 J_sim         = np.arange(5, 51, 3)
 nNodes        = 101
@@ -136,29 +137,29 @@ ISF3   = np.asarray(ISF3)
 
 pyplot.close('all')
 ax            = pyplot.axes()
-ax.plot(J_theor, ISF1, '-', color='k',   label = 'FWHM = 10%')
-ax.plot(J_theor, ISF2, '-', color='0.5', linewidth=2, label = 'FWHM = 20%')
-ax.plot(J_theor, ISF3, '-', color='0.7', linewidth=3, label = 'FWHM = 30%')
+ax.plot(J_theor, ISF1, '-', color='k', linewidth=1,  label = 'FWHM = 10%')
+ax.plot(J_theor, ISF2, '-', color='0.7', linewidth=2, label = 'FWHM = 20%')
+ax.plot(J_theor, ISF3, '-', color='0.4', linewidth=5, label = 'FWHM = 30%')
 
 
-ax.plot(J_sim, fp_fdr1, 'o',color='k')
-ax.plot(J_sim, fp_fdr2, 'o', color='0.5', linewidth=2)
-ax.plot(J_sim, fp_fdr3, 'o', color='0.7', linewidth= 3)
+ax.plot(J_sim, fp_fdr1, '--',color='k', linewidth=1)
+ax.plot(J_sim, fp_fdr2, '--', color='0.7', linewidth=2)
+ax.plot(J_sim, fp_fdr3, '--', color='0.4', linewidth= 5)
 
 
 ax.set_xlabel('Sample size', size=18)
-ax.set_ylabel('Critical threshold', size=18)
+ax.set_ylabel('Critical t value', size=18)
 
 ax.set_ylim(1.5,10)
-ax.set_xlim(4,52)
+ax.set_xlim(5,50)
 
 
 
 
-colors           = ['k', '0.5', '0.7','1', 'k', 'k']
+colors           = ['k', '0.7', '0.4','1', 'k', 'k']
 labels           = ['FWHM = 10%', 'FWHM = 20%','FWHM = 30%','','RFT threshold', 'FDR threshold']
-linestyles       = ['-','-','-','-','-','o']
-linewidths       = [1,2,3,1,1,1]
+linestyles       = ['-','-','-','-','-','--']
+linewidths       = [1,2,5,1,1,1]
 
 legend_object    = custom_legend(ax, colors, labels, linestyles, linewidths)
 

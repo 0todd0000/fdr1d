@@ -37,7 +37,7 @@ J_sim         = np.arange(5, 51, 3)
 nNodes        = 101
 WW            = [10, 20, 30]
 alpha         = 0.05
-nIterations   = 100   #change this to 10000 to replicate the paper’s results
+nIterations   = 10
 Q      = 101 
 q      = 50
 sigma  = 20 
@@ -138,31 +138,31 @@ ax.plot(J_theor, ISF1, '-', color='k')
 ax.plot(J_theor, ISF2, '-', color='0.5')
 ax.plot(J_theor, ISF3, '-', color='0.7')
 
-ax.plot(J_sim, fp_fdr1, 'o',color='k')
-ax.plot(J_sim, fp_fdr2, 'o', color='0.5')
-ax.plot(J_sim, fp_fdr3, 'o', color='0.7')
+ax.plot(J_sim, fp_fdr1, '--',color='k')
+ax.plot(J_sim, fp_fdr2, '--', color='0.5')
+ax.plot(J_sim, fp_fdr3, '--', color='0.7')
 
 ax.set_xlabel('Sample size', size=18)
-ax.text(4, 10.1, 'c', fontsize=20, color='k')
-
+ax.text(5, 10.1, 'c', fontsize=18, color='k')
+ax.text(23, 10.2, 'SNR=1', fontsize=20, color='k')
+ax.set_ylabel('Critical t value', size=18)
 
 ax.set_ylim(1.5,10)
-ax.set_xlim(4,52)
+ax.set_xlim(5,50)
 
 
 
 
 colors           = ['k', '0.5', '0.7','1', 'k', 'k']
 labels           = ['FWHM = 10%', 'FWHM = 20%','FWHM = 30%','','RFT threshold', 'FDR threshold']
-linestyles       = ['-','-','-','-','-','o']
-linewidths       = [1,2,4,1,1,1]
+linestyles       = ['-','-','-','-','-','--']
+linewidths       = [2,2,2,1,1,1]
 
 legend_object    = custom_legend(ax, colors, labels, linestyles, linewidths)
 
 
 
-ax.set_ylim(1.5,10)
-ax.set_xlim(4,52)
+
 
 pyplot.style.use('classic')
 pyplot.rcParams['figure.facecolor'] = 'white'
