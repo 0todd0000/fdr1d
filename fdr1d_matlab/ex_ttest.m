@@ -14,7 +14,7 @@ alpha         = 0.05;
 two_tailed    = false;
 spm           = spm1d.stats.ttest(Y - mu);
 spmi          = spm.inference(alpha, 'two_tailed', two_tailed);
-zstar         = inference(spmi, alpha, two_tailed);
+zstar         = inference_fdr(spm, alpha, two_tailed);
 % zstar         = inference_manual(spm.z, spm.df(2), alpha, stat, two_tailed);
 
 

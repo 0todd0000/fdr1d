@@ -13,7 +13,7 @@ alpha      = 0.05;
 two_tailed = false;
 spm        = spm1d.stats.regress(Y, x);
 spmi       = spm.inference(0.05, 'two_tailed', false);
-zstar      = inference(spmi, alpha, two_tailed);
+zstar      = inference_fdr(spm, alpha, two_tailed);
 
 
 

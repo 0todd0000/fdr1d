@@ -14,7 +14,7 @@ two_tailed = false;
 spm       = spm1d.stats.ttest_paired(YA, YB);
 spmi      = spm.inference(alpha, 'two_tailed', two_tailed, 'interp',true);
 % FDR analysis
-zstar      = inference(spmi, alpha, two_tailed);
+zstar      = inference_fdr(spm, alpha, two_tailed);
 
 
 %(2) Plot:
