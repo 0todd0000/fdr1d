@@ -25,7 +25,7 @@ z         = abs(z);
 if stat == 'T'
     p     = 1 - spm_Tcdf(z, df);
 elseif stat == 'F'
-    p     = spm_Fcdf(z, df);
+    p     = 1 - spm_Fcdf(z, df);
 elseif stat == 'T2'
     p     = 1 - spm_Tcdf(z, df);
 elseif stat == 'X2'
