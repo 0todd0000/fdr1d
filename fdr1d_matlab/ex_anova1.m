@@ -12,11 +12,10 @@ dataset  = spm1d.data.uv1d.anova1.Weather();
 
 %(1) Conduct SPM analysis:
 alpha      = 0.05;
-two_tailed = false;
 spm        = spm1d.stats.anova1(Y, A);
 spmi       = spm.inference(0.05);
 disp(spmi)
-fstar      = inference_fdr(spm, alpha, two_tailed);
+fstar      = inference_fdr(spm, alpha);
 
 
 
