@@ -1,7 +1,6 @@
 clearvars
-%addpath
-addpath('C:\Users\s5001683\Documents\MATLAB\spm1d');
-addpath('C:\Users\s5001683\Documents\MATLAB\spm1d\spm8');
+
+
 
 %(0) Load dataset:
 dataset    = spm1d.data.uv1d.t1.Random();
