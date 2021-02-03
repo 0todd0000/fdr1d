@@ -23,3 +23,12 @@ disp_summ(spmilist)
 close all
 spmilist.plot('plot_threshold_label',false, 'plot_p_values',true, 'autoset_ylim',true);
 
+% %MANUALLY construct the same plot:
+for k = 1:spmilist.nEffects
+    subplot(3,3,k)
+    spmi = spmilist(k);
+    spmi.plot();
+    title( spmi.effect )
+    line( xlim, [fstar(k) fstar(k)], 'color', 'blue', 'linestyle', '--');
+    text( mean(xlim), fstar(k), sprintf('F* (FDR) = %.3f', fstar(k)), 'color', 'blue')
+end

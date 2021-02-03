@@ -27,7 +27,7 @@ hold on
 plot(spm_bs.z, 'r')  %between-subjects model
 
 line( xlim, [fstar fstar], 'color', 'blue', 'linestyle', '--');
-text( mean(xlim), fstar, sprintf('t* (FDR) = %.3f', fstar), 'color', 'blue')
+text( mean(xlim), fstar, sprintf('F* (FDR) = %.3f', fstar), 'color', 'blue')
 
 
 
