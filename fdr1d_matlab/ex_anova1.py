@@ -6,17 +6,17 @@ import fdr1d
 
 #(0) Load dataset:
 dataset      = spm1d.data.uv1d.anova1.SpeedGRFcategorical()
-# dataset      = spm1d.data.uv1d.anova1.Weather()
+dataset      = spm1d.data.uv1d.anova1.Weather()
 Y,A          = dataset.get_data()
 
 
 
 #(1) Run ANOVA:
-alpha        = 0.0005
-F            = spm1d.stats.anova1(Y, A, equal_var=False)
+alpha        = 0.05
+F            = spm1d.stats.anova1(Y, A, equal_var=True)
 Fi           = F.inference(alpha, interp=True, circular=False)
 print( Fi )
-fstar_fdr    = fdr1d.inference(F, alpha=0.05)
+fstar_fdr    = fdr1d.inference(F, alpha=alpha)
 ### alternative syntax:
 # Y0,Y1,Y2     = [Y[A==u] for u in np.unique(A)]
 # F            = spm1d.stats.anova1((Y0,Y1,Y2), equal_var=False)

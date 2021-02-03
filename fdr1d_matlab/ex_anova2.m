@@ -30,6 +30,8 @@ spmlist        = spm1d.stats.anova2(Y, A, B);
 spmilist       = spmlist.inference(alpha);
 fstar          = inference_fdr(spmlist, alpha, two_tailed);
 disp_summ(spmilist)
+disp('FDR thresholds:')
+disp(fstar)
 
 
 %(2) Plot:

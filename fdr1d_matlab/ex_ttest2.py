@@ -15,7 +15,7 @@ YA,YB        = dataset.get_data()
 #(1) Conduct t test:
 alpha      = 0.05
 two_tailed = False
-t          = spm1d.stats.ttest2(YB, YA, equal_var=True)
+t          = spm1d.stats.ttest2(YA, YB, equal_var=True)
 ti         = t.inference(alpha, two_tailed=two_tailed, interp=True)
 tstar_fdr  = fdr1d.inference(t, alpha=0.05, two_tailed=two_tailed)
 print( ti )
